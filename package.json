@@ -2,9 +2,9 @@
   "name": "get-info-on-site-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "superpush": "git push && git push heroku main"
   },
@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/skunkix/get-info-on-site-server/issues"
   },
-  "homepage": "https://github.com/skunkix/get-info-on-site-server#readme"
+  "homepage": "https://github.com/skunkix/get-info-on-site-server#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "url-metadata": "^2.5.0"
+  }
 }
