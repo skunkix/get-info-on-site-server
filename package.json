@@ -21,6 +21,7 @@
   "homepage": "https://github.com/skunkix/get-info-on-site-server#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "graphql": "^15.5.1",
     "url-metadata": "^2.5.0"
   }
 }
