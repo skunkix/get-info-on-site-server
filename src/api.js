@@ -1,16 +1,19 @@
-import { buildSchema } from "graphql";
+import {buildSchema, graphql} from "graphql";
 
 const schema = buildSchema(`
+    type Query {
+      getAlbum(title: String!): Album
+    }
     type Album {
-      artist: Artist!,
-      id: String!,
-      link: String,
-      genres: [String],
-      images: [Image],
-      label: String,
-      name: String!,
-      popularity: Int,
-      release_date: String,
+      artist: Artist!
+      id: String!
+      link: String
+      genres: [String]
+      images: [Image]
+      label: String
+      name: String!
+      popularity: Int
+      release_date: String
       num_tracks: Int
     }
     type Artist {
@@ -21,12 +24,53 @@ const schema = buildSchema(`
     type Image {
       url: String 
     }
-    type Query {
-      getAlbum(title: String): Album
-    }
   `);
 
-function start() {
+async function query(spotifyApi, q) {
+  const root = {
+    getAlbum: async (args) => {
+      const data = await spotifyApi.queryAlbum(args.title);
+      return {
+        ...data,
+        artist: data.artists[0],
+        link: data.href,
+      }
+    },
+    Album: {
+      artist: (obj) => {
+        return { ...obj, link: obj.href }
+      }
+    },
+    Artist: (obj) => {
+      return {
+        id: obj.id,
+        name: obj.artists.name,
+        link: obj.href
+      }
+    },
+  }
+
+  // Example query
+   //  `{ getAlbum(title: "blue+album") {
+   //  artist {
+   //    name
+   //  }
+   //  images {
+   //    url
+   //  }
+   // }}`
+
+  const result = await graphql(schema, `{ getAlbum(title: "blue+album") { 
+   artist {
+     name    
+     link    
+   }
+   images {
+     url
+   } 
+  }}`, root);
+  console.log(JSON.stringify(result));
 }
 
-export default start;
+export default query;
+
