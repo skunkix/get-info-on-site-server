@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skunkix/get-info-on-site-server.git"
+    "url": "git+https://github.com/stringribbow/get-info-on-site-server.git"
   },
   "type": "module",
   "author": "skunkix",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/skunkix/get-info-on-site-server/issues"
+    "url": "https://github.com/stringribbow/get-info-on-site-server/issues"
   },
-  "homepage": "https://github.com/skunkix/get-info-on-site-server#readme",
+  "homepage": "https://github.com/stringribbow/get-info-on-site-server#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "graphql": "^15.5.1",
