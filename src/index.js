@@ -1,23 +1,15 @@
 import {SpotifyAPI} from "./queryAlbum.js";
 import createSchema from "./schema.js";
-import {graphql} from "graphql";
+import express from "express";
+import { graphqlHTTP } from 'express-graphql';
 
 const spotify = new SpotifyAPI();
 spotify.authenticate();
+
+const app = express();
 const schema = createSchema(spotify);
-const query = async () => {
-  const result = await graphql(schema, `{ getAlbum(title: "blue+album") { 
-   artist {
-     name    
-     link    
-   }
-   images {
-     url
-   },
-   genres, popularity
-  }}`);
-
-  console.log(JSON.stringify(result));
-}
-
-setTimeout(query, 500)
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  graphiql: true,
+}));
+app.listen(4000);
