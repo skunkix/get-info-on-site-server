@@ -43,6 +43,7 @@ export class SpotifyAPI {
       const response = await axios.get(`https://api.spotify.com/v1/search?query=${term}&offset=0&limit=1&type=album`, {
         headers: this.getPostAuthorizationHeaders()
       });
+      console.log(response.data.albums.items[0])
       return response.data.albums.items[0].id;
     } catch {
       console.error("Spotify search failed");

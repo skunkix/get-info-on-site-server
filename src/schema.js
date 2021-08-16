@@ -55,6 +55,7 @@ function createSchema(spotifyApi) {
               name: result.artists[0].name
             },
             link: result.href,
+            num_tracks: result.total_tracks
           }
         }
       }
